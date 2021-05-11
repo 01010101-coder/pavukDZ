@@ -8,7 +8,7 @@ url = f'https://www.dominos.by/'
 r = requests.get(url)  # подключаюсь по указанному урлу
 result = pd.DataFrame()  # создаю таблицу
 soup = BeautifulSoup(r.text, features='html.parser')  # это сам парсер
-tables = soup.find_all('table', {'class': 'qaBlock'})
+tables = soup.find_all('div ', {'class': 'product-card'})
 
 
 for item in tables:

@@ -8,16 +8,14 @@ def parse_table(table):
 
     user = ''
 
-    answer = ''
+    cena = ''
 
     name_tr = table.find('div',{'class': 'product-card__title'})
     # получаю текст вопроса
-    name = name_tr.find('#text').text.replace('<br />', '\n').strip()
+    name = name_tr.find('div').text.replace('<br />', '\n').strip()
 
     ingridients_tr = name_tr.find_all('div', {'class': 'product-card__description'})
-
-    # кто задал вопрос
-    ingridients = ingridients_tr.find('div').text.strip()
+    ingridients = ingridients_tr.text.strip()
 
     # ответы
     cena_tr = table.find('p', {'class': 'product-card__modification-info-price'})
