@@ -1,27 +1,20 @@
 import pandas as pd
 
-
-def parse_table(card):
+def parse(cards):
     res = pd.DataFrame()
 
     name = ''
 
     ingridients = ''
 
-    cena = ''
+    price = ''
 
+    name=cards.find('div', {'class': 'product-card__title'}).text
 
-    # получаю текст вопроса
-    name = card.find('div').text.strip()
+    ingridients=cards.find('div', {'class':'product-card__description'}).text
 
-    ingridients_tr = card.find('div', {'class': 'product-card__description'})
-    ingridients = ingridients_tr.text.strip()
+    price=cards.find('div', {'class':'product-card__modification-info-price'}).text
 
-    # ответы
-    cena_tr = card.find('p', {'class': 'product-card__modification-info-price'})
-    cena = cena_tr.find_all('#text')[0].find('div').text.strip()
+    res = res.append(pd.DataFrame([[name, ingridients, price]], columns = ['Name', 'Ingridients', 'Price']))
+    return(res)
 
-    res = res.append(pd.DataFrame([
-        [name, ingridients, cena]
-    ], columns=['Name', 'Ingridients', 'Cena_na_angliyskom']), ignore_index=True)
-    return res
