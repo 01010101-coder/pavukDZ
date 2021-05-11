@@ -6,7 +6,7 @@ def parse_table(card):
 
     name = ''
 
-    user = ''
+    ingridients = ''
 
     cena = ''
 
