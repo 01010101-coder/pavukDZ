@@ -1,6 +1,6 @@
 import pandas as pd
 
-def parse(cards):
+def parse(div):
     res = pd.DataFrame()
 
     name = ''
@@ -9,11 +9,11 @@ def parse(cards):
 
     price = ''
 
-    name=cards.find('div', {'class': 'product-card__title'}).text
+    name=div.find('div', {'class': 'product-card__title'}).text
 
-    ingridients=cards.find('div', {'class':'product-card__description'}).text
+    ingridients=div.find('div', {'class':'product-card__description'}).text
 
-    price=cards.find('div', {'class':'product-card__modification-info-price'}).text
+    price=div.find('p', {'class':'product-card__modification-info-price'}).text
 
     res = res.append(pd.DataFrame([[name, ingridients, price]], columns = ['Name', 'Ingridients', 'Price']))
     return(res)
